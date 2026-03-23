@@ -36,8 +36,8 @@ const GlobalStyle = () => (
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
     
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
-    body{background:#0d0d0f;color:#e8e6df;font-family:'Crimson Pro',serif;font-size:18px;line-height:1.7;overflow-x:hidden;margin:0}
+    html{scroll-behavior:smooth;overflow-x:hidden}
+    body{background:#0d0d0f;color:#e8e6df;font-family:'Crimson Pro',serif;font-size:18px;line-height:1.7;overflow-x:hidden;margin:0;width:100%}
     
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-track{background:#0d0d0f}
@@ -60,297 +60,204 @@ const GlobalStyle = () => (
     a{color:inherit;text-decoration:none}
     
     /* ============================================ */
-    /* RESPONSIVE MEDIA QUERIES - Mobile Only */
-    /* Preserves all desktop styles */
+    /* COMPLETE MOBILE RESPONSIVE FIXES */
     /* ============================================ */
     
+    /* Mobile Styles (up to 1023px) */
     @media (max-width: 1023px) {
-      /* General adjustments */
       body {
         font-size: 16px;
         line-height: 1.6;
+        overflow-x: hidden;
+        width: 100%;
       }
       
-      /* Navigation - Mobile */
+      /* Fix all containers to prevent overflow */
+      section, div, main, footer {
+        max-width: 100vw;
+        overflow-x: hidden;
+      }
+      
+      /* Navigation */
       nav {
         padding: 0 20px !important;
         height: 60px !important;
       }
       
+      nav a[href="#hero"] {
+        font-size: 18px !important;
+      }
+      
+      /* Hide desktop navigation links */
       nav > div:first-of-type {
         display: none !important;
       }
       
-      /* Show hamburger menu - will need to add this in JS */
-      .nav-links {
-        display: none;
+      /* Show hamburger menu button with visible color */
+      .mobile-menu-btn {
+        display: flex !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 8px !important;
+        width: 40px !important;
+        height: 40px !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #e8e6df !important;
       }
       
-      nav button {
+      .mobile-menu-btn svg {
+        stroke: #e8e6df !important;
+      }
+      
+      /* Mobile Menu */
+      .mobile-menu {
+        position: fixed !important;
+        top: 60px !important;
+        left: 0 !important;
+        right: 0 !important;
+        background: rgba(13,13,15,0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        border-bottom: 1px solid #2a2a32 !important;
+        padding: 24px 20px !important;
+        z-index: 199 !important;
+        display: none !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+      }
+      
+      .mobile-menu a {
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 16px !important;
+        color: #e8e6df !important;
+        padding: 12px 0 !important;
+        border-bottom: 1px solid #2a2a32 !important;
         display: block !important;
       }
       
-      /* Section padding */
-      section {
-        padding-left: 20px !important;
-        padding-right: 20px !important;
+      .mobile-menu.open {
+        display: flex !important;
       }
       
-      /* Hero section */
+      /* All sections - reduce padding */
+      section {
+        padding: 60px 20px !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+      
+      /* Hero Section */
       #hero {
         padding: 100px 20px 60px !important;
+        min-height: auto !important;
       }
       
       #hero h1 {
-        font-size: clamp(48px, 12vw, 80px) !important;
+        font-size: clamp(44px, 12vw, 70px) !important;
         letter-spacing: -2px !important;
+        line-height: 0.95 !important;
       }
       
       #hero p {
         font-size: 16px !important;
       }
       
-      #hero .stats {
+      #hero .stats-container {
         gap: 30px !important;
-        margin-top: 50px !important;
+        margin-top: 48px !important;
+        flex-wrap: wrap !important;
+        justify-content: space-between !important;
       }
       
-      #hero .stats > div {
-        flex: 1;
-        text-align: center;
+      #hero .stat-item {
+        flex: 1 !important;
+        min-width: 80px !important;
+        text-align: center !important;
       }
       
-      /* About section - 2 column to 1 column on mobile */
+      #hero .stat-number {
+        font-size: 32px !important;
+      }
+      
+      /* About Section - Make it single column */
       #about > div:last-child {
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
         gap: 48px !important;
       }
       
-      #about h2 {
-        margin-bottom: 40px !important;
+      #about .about-text {
+        width: 100% !important;
       }
       
       #about .quick-facts {
         padding: 28px !important;
+        width: 100% !important;
       }
       
-      /* Services section */
+      /* Services Section - Make all cards full width */
       #services > div:last-child {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-      }
-      
-      .service-card {
-        padding: 28px !important;
-      }
-      
-      /* Data Band - Responsive */
-      .data-band {
-        padding: 28px 20px !important;
-      }
-      
-      .data-band > div:first-child {
+        display: flex !important;
         flex-direction: column !important;
         gap: 20px !important;
       }
       
-      .data-band .deliverables {
-        grid-template-columns: 1fr !important;
+      .service-card {
+        width: 100% !important;
+        padding: 28px !important;
+      }
+      
+      /* Data Band - Make it responsive */
+      .data-band {
+        padding: 28px 20px !important;
+        margin-top: 32px !important;
+      }
+      
+      .data-band-header {
+        flex-direction: column !important;
+        gap: 20px !important;
+      }
+      
+      .data-band-deliverables {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+      }
+      
+      .data-band-deliverable {
+        width: 100% !important;
+        padding: 14px !important;
+      }
+      
+      .data-band-tags {
+        gap: 8px !important;
       }
       
       /* WorkDora Band */
       .workdora-band {
         padding: 28px 20px !important;
-        margin-top: 40px !important;
+        margin-top: 32px !important;
       }
       
       .workdora-band h3 {
         font-size: 24px !important;
       }
       
-      .workdora-band button {
+      .workdora-band .workdora-btn {
         width: 100% !important;
         justify-content: center !important;
       }
       
-      /* Stack section */
-      #stack .stack-grid {
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
-      }
-      
-      #stack .stack-layer {
+      /* Stack Section - Make 2 columns on tablet, 1 on mobile */
+      .stack-layer {
         margin-bottom: 28px !important;
       }
       
-      .stack-item {
-        padding: 14px 16px !important;
-      }
-      
-      /* Projects section */
-      #work > div:last-child {
-        grid-template-columns: 1fr !important;
-        gap: 20px !important;
-      }
-      
-      .project-card {
-        grid-column: span 1 !important;
-        padding: 28px !important;
-      }
-      
-      .project-card h3 {
-        font-size: 24px !important;
-      }
-      
-      /* Creator section */
-      .creator-section {
-        padding: 60px 20px !important;
-      }
-      
-      .creator-section > div {
-        grid-template-columns: 1fr !important;
-        gap: 48px !important;
-      }
-      
-      .creator-section h2 {
-        font-size: clamp(28px, 6vw, 40px) !important;
-      }
-      
-      /* Booking section */
-      .booking-section {
-        padding: 60px 20px !important;
-      }
-      
-      .booking-section .booking-grid {
-        grid-template-columns: 1fr !important;
-        gap: 16px !important;
-        margin-bottom: 36px !important;
-      }
-      
-      .booking-card {
-        padding: 24px !important;
-      }
-      
-      /* Contact section */
-      #contact {
-        grid-template-columns: 1fr !important;
-        gap: 48px !important;
-        padding: 60px 20px !important;
-      }
-      
-      #contact .contact-form {
-        padding-top: 0 !important;
-      }
-      
-      #contact .form-grid {
-        grid-template-columns: 1fr !important;
-      }
-      
-      /* Footer */
-      footer {
-        flex-direction: column !important;
-        text-align: center !important;
-        gap: 16px !important;
-        padding: 28px 20px !important;
-      }
-      
-      footer > div:last-child {
-        justify-content: center !important;
-      }
-      
-      /* Divider */
-      .divider {
-        margin: 0 20px !important;
-      }
-      
-      /* Buttons */
-      .btn-group {
+      .stack-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
         gap: 12px !important;
-      }
-      
-      button, .btn {
-        padding: 10px 20px !important;
-        font-size: 12px !important;
-      }
-      
-      /* Floating buttons - adjust for mobile */
-      .floating-buttons {
-        bottom: 20px !important;
-        right: 20px !important;
-        gap: 10px !important;
-      }
-      
-      .floating-buttons a {
-        width: 48px !important;
-        height: 48px !important;
-      }
-      
-      .floating-buttons .wa-btn {
-        width: 52px !important;
-        height: 52px !important;
-      }
-      
-      /* Tooltips on mobile */
-      .tooltip {
-        display: none !important;
-      }
-    }
-    
-    /* Tablet optimization (optional) */
-    @media (min-width: 768px) and (max-width: 1023px) {
-      /* Services - 2 columns on tablet */
-      #services > div:last-child {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-      
-      /* Projects - 2 columns on tablet */
-      #work > div:last-child {
-        grid-template-columns: repeat(2, 1fr) !important;
-      }
-      
-      /* Project card featured spans full width on tablet */
-      .project-card.featured {
-        grid-column: span 2 !important;
-      }
-      
-      /* Creator section on tablet */
-      .creator-section > div {
-        gap: 48px !important;
-      }
-    }
-    
-    /* Small mobile devices (below 480px) */
-    @media (max-width: 480px) {
-      body {
-        font-size: 15px;
-      }
-      
-      #hero h1 {
-        font-size: clamp(40px, 10vw, 60px) !important;
-      }
-      
-      #hero .stats {
-        gap: 20px !important;
-      }
-      
-      #hero .stats > div {
-        min-width: 80px;
-      }
-      
-      #hero .stats .stat-number {
-        font-size: 28px !important;
-      }
-      
-      .service-card {
-        padding: 24px !important;
-      }
-      
-      .service-card .service-icon {
-        font-size: 28px !important;
-      }
-      
-      .service-card h3 {
-        font-size: 20px !important;
       }
       
       .stack-item {
@@ -361,34 +268,271 @@ const GlobalStyle = () => (
         font-size: 12px !important;
       }
       
+      /* Projects Section - Make all cards full width */
+      #work > div:last-child {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 20px !important;
+      }
+      
       .project-card {
-        padding: 24px !important;
+        width: 100% !important;
+        grid-column: span 1 !important;
+        padding: 28px !important;
+      }
+      
+      .project-card.featured {
+        order: -1 !important;
       }
       
       .project-card h3 {
-        font-size: 22px !important;
+        font-size: 24px !important;
+      }
+      
+      .project-stack {
+        flex-wrap: wrap !important;
+        gap: 6px !important;
+      }
+      
+      /* Creator Section */
+      .creator-section {
+        padding: 60px 20px !important;
+      }
+      
+      .creator-content {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 48px !important;
+      }
+      
+      .creator-left h2 {
+        font-size: clamp(28px, 6vw, 40px) !important;
+      }
+      
+      .creator-platforms {
+        flex-wrap: wrap !important;
+        gap: 10px !important;
+      }
+      
+      /* Booking Section */
+      .booking-section {
+        padding: 60px 20px !important;
+      }
+      
+      .booking-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        margin-bottom: 36px !important;
       }
       
       .booking-card {
-        padding: 20px !important;
+        width: 100% !important;
+        padding: 24px !important;
       }
       
-      .booking-card .booking-icon {
-        font-size: 28px !important;
+      .booking-card .booking-time {
+        font-size: 10px !important;
+        padding: 3px 10px !important;
       }
       
-      .booking-card h4 {
-        font-size: 18px !important;
+      /* Contact Section */
+      #contact {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 48px !important;
+        padding: 60px 20px !important;
+      }
+      
+      #contact .contact-left {
+        width: 100% !important;
+      }
+      
+      #contact .contact-right {
+        width: 100% !important;
+        padding-top: 0 !important;
+      }
+      
+      .form-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
       }
       
       .channel-row {
         padding: 14px 16px !important;
       }
       
-      .channel-row .channel-icon {
+      .channel-icon {
         width: 36px !important;
         height: 36px !important;
         font-size: 16px !important;
+      }
+      
+      /* Footer */
+      footer {
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 16px !important;
+        padding: 28px 20px !important;
+      }
+      
+      footer > div:last-child {
+        justify-content: center !important;
+        flex-wrap: wrap !important;
+        gap: 16px !important;
+      }
+      
+      /* Divider */
+      .divider {
+        margin: 0 20px !important;
+      }
+      
+      /* Button group */
+      .btn-group {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        gap: 12px !important;
+      }
+      
+      .btn-group .btn, 
+      .btn-group a {
+        flex: 1 !important;
+        min-width: auto !important;
+        justify-content: center !important;
+      }
+      
+      /* Floating buttons - reposition for mobile */
+      .floating-buttons {
+        bottom: 20px !important;
+        right: 20px !important;
+        gap: 10px !important;
+      }
+      
+      .floating-buttons .cal-btn {
+        width: 48px !important;
+        height: 48px !important;
+      }
+      
+      .floating-buttons .wa-btn {
+        width: 52px !important;
+        height: 52px !important;
+      }
+      
+      /* Hide tooltips on mobile */
+      .tooltip {
+        display: none !important;
+      }
+      
+      /* Fix all grid layouts that might cause overflow */
+      [style*="display: grid"] {
+        max-width: 100% !important;
+      }
+    }
+    
+    /* Tablet Optimization (768px to 1023px) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* Services - 2 columns on tablet */
+      #services > div:last-child {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+      }
+      
+      /* Projects - 2 columns on tablet */
+      #work > div:last-child {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 20px !important;
+      }
+      
+      .project-card.featured {
+        grid-column: span 2 !important;
+      }
+      
+      /* Stack - 4 columns on tablet */
+      .stack-grid {
+        grid-template-columns: repeat(4, 1fr) !important;
+      }
+      
+      /* Creator section on tablet */
+      .creator-content {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 48px !important;
+      }
+      
+      /* Booking on tablet */
+      .booking-grid {
+        display: grid !important;
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 16px !important;
+      }
+    }
+    
+    /* Small Mobile (below 480px) */
+    @media (max-width: 480px) {
+      body {
+        font-size: 14px;
+      }
+      
+      #hero h1 {
+        font-size: clamp(36px, 10vw, 48px) !important;
+      }
+      
+      #hero .stats-container {
+        gap: 20px !important;
+      }
+      
+      #hero .stat-number {
+        font-size: 28px !important;
+      }
+      
+      #hero .stat-label {
+        font-size: 9px !important;
+      }
+      
+      .service-card h3 {
+        font-size: 20px !important;
+      }
+      
+      .service-card .service-icon {
+        font-size: 28px !important;
+      }
+      
+      .stack-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      .project-card h3 {
+        font-size: 22px !important;
+      }
+      
+      .booking-card h4 {
+        font-size: 18px !important;
+      }
+      
+      .channel-row .channel-value {
+        font-size: 13px !important;
+      }
+      
+      button, .btn {
+        font-size: 12px !important;
+        padding: 10px 16px !important;
+      }
+    }
+    
+    /* Desktop styles remain untouched - show desktop navigation */
+    @media (min-width: 1024px) {
+      .mobile-menu-btn {
+        display: none !important;
+      }
+      .mobile-menu {
+        display: none !important;
+      }
+      nav > div:first-of-type {
+        display: flex !important;
       }
     }
   `}</style>
@@ -631,29 +775,29 @@ function Nav() {
             Let's Talk
           </Btn>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - White color for visibility */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="mobile-menu-btn"
             style={{
-              display: "none",
               background: "transparent",
               border: "none",
               cursor: "pointer",
               padding: "8px",
               width: "40px",
               height: "40px",
+              display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              "@media (max-width: 1023px)": { display: "flex" },
+              color: "#e8e6df",
             }}
-            className="mobile-menu-btn"
           >
             <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={COLORS.text}
+              stroke="currentColor"
               strokeWidth="2"
             >
               {mobileMenuOpen ? (
@@ -666,70 +810,42 @@ function Nav() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
-      {mobileMenuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: 70,
-            left: 0,
-            right: 0,
-            background: "rgba(13,13,15,0.98)",
-            backdropFilter: "blur(20px)",
-            borderBottom: `1px solid ${COLORS.border}`,
-            padding: "24px 20px",
-            zIndex: 199,
-            display: "none",
-            flexDirection: "column",
-            gap: 20,
-          }}
-          className="mobile-menu"
-        >
-          {links.map((l) => (
-            <a
-              key={l}
-              href={`#${l.toLowerCase()}`}
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                fontFamily: FONTS.mono,
-                fontSize: 16,
-                color: COLORS.text,
-                padding: "12px 0",
-                borderBottom: `1px solid ${COLORS.border}`,
-                display: "block",
-              }}
-            >
-              {l}
-            </a>
-          ))}
-        </div>
-      )}
-
-      {/* Add style to show mobile elements only on small screens */}
-      <style>{`
-        @media (max-width: 1023px) {
-          .mobile-menu-btn {
-            display: flex !important;
-          }
-          .mobile-menu {
-            display: flex !important;
-          }
-          nav > div:first-of-type {
-            display: none !important;
-          }
-        }
-        @media (min-width: 1024px) {
-          .mobile-menu-btn {
-            display: none !important;
-          }
-          .mobile-menu {
-            display: none !important;
-          }
-          nav > div:first-of-type {
-            display: flex !important;
-          }
-        }
-      `}</style>
+      {/* Mobile Menu */}
+      <div
+        className={`mobile-menu ${mobileMenuOpen ? "open" : ""}`}
+        style={{
+          position: "fixed",
+          top: 70,
+          left: 0,
+          right: 0,
+          background: "rgba(13,13,15,0.98)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid #2a2a32",
+          padding: "24px 20px",
+          zIndex: 199,
+          display: mobileMenuOpen ? "flex" : "none",
+          flexDirection: "column",
+          gap: 20,
+        }}
+      >
+        {links.map((l) => (
+          <a
+            key={l}
+            href={`#${l.toLowerCase()}`}
+            onClick={() => setMobileMenuOpen(false)}
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 16,
+              color: "#e8e6df",
+              padding: "12px 0",
+              borderBottom: "1px solid #2a2a32",
+              display: "block",
+            }}
+          >
+            {l}
+          </a>
+        ))}
+      </div>
     </>
   );
 }
@@ -917,19 +1033,20 @@ function Hero() {
       </div>
 
       <div
+        className="stats-container"
         style={{
           display: "flex",
           gap: 44,
           marginTop: 72,
           paddingTop: 44,
           borderTop: `1px solid ${COLORS.border}`,
-          animation: "fadeUp 0.7s 0.42s cubic-bezier(0.16,1,0.3,1) both",
           flexWrap: "wrap",
         }}
       >
         {stats.map((s) => (
-          <div key={s.label}>
+          <div key={s.label} className="stat-item">
             <div
+              className="stat-number"
               style={{
                 fontFamily: FONTS.disp,
                 fontSize: 38,
@@ -941,6 +1058,7 @@ function Hero() {
               {s.num}
             </div>
             <div
+              className="stat-label"
               style={{
                 fontFamily: FONTS.mono,
                 fontSize: 11,
@@ -1296,8 +1414,8 @@ function Services() {
         className="reveal"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr",
-          gap: "20px",
+          gridTemplateColumns: "repeat(2,1fr)",
+          gap: 22,
         }}
       >
         {SERVICES.map((s, i) => (
