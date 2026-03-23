@@ -34,24 +34,363 @@ const CAL_LINK =
 const GlobalStyle = () => (
   <style>{`
     @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+    
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:#0d0d0f;color:#e8e6df;font-family:'Crimson Pro',serif;font-size:18px;line-height:1.7;overflow-x:hidden;margin:0}
+    
     ::-webkit-scrollbar{width:3px}
     ::-webkit-scrollbar-track{background:#0d0d0f}
     ::-webkit-scrollbar-thumb{background:#f0a500;border-radius:2px}
+    
     @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
     @keyframes blink{0%,100%{opacity:1}50%{opacity:0.25}}
     @keyframes waPulse{0%,100%{box-shadow:0 4px 24px rgba(37,211,102,0.35)}50%{box-shadow:0 4px 44px rgba(37,211,102,0.65)}}
     @keyframes calPulse{0%,100%{box-shadow:0 4px 24px rgba(66,133,244,0.35)}50%{box-shadow:0 4px 44px rgba(66,133,244,0.65)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
     @keyframes gridFade{from{opacity:0}to{opacity:1}}
+    
     .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1)}
     .reveal.visible{opacity:1;transform:translateY(0)}
+    
     input,textarea,select{background:#1c1c21;border:1px solid #2a2a32;border-radius:8px;padding:13px 17px;color:#e8e6df;font-family:'Crimson Pro',serif;font-size:16px;outline:none;transition:border-color 0.2s;width:100%;resize:none}
     input:focus,textarea:focus,select:focus{border-color:#f0a500}
     input::placeholder,textarea::placeholder{color:#4a4845}
     select option{background:#0d0d0f}
     a{color:inherit;text-decoration:none}
+    
+    /* ============================================ */
+    /* RESPONSIVE MEDIA QUERIES - Mobile Only */
+    /* Preserves all desktop styles */
+    /* ============================================ */
+    
+    @media (max-width: 1023px) {
+      /* General adjustments */
+      body {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      
+      /* Navigation - Mobile */
+      nav {
+        padding: 0 20px !important;
+        height: 60px !important;
+      }
+      
+      nav > div:first-of-type {
+        display: none !important;
+      }
+      
+      /* Show hamburger menu - will need to add this in JS */
+      .nav-links {
+        display: none;
+      }
+      
+      nav button {
+        display: block !important;
+      }
+      
+      /* Section padding */
+      section {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+      }
+      
+      /* Hero section */
+      #hero {
+        padding: 100px 20px 60px !important;
+      }
+      
+      #hero h1 {
+        font-size: clamp(48px, 12vw, 80px) !important;
+        letter-spacing: -2px !important;
+      }
+      
+      #hero p {
+        font-size: 16px !important;
+      }
+      
+      #hero .stats {
+        gap: 30px !important;
+        margin-top: 50px !important;
+      }
+      
+      #hero .stats > div {
+        flex: 1;
+        text-align: center;
+      }
+      
+      /* About section - 2 column to 1 column on mobile */
+      #about > div:last-child {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+      }
+      
+      #about h2 {
+        margin-bottom: 40px !important;
+      }
+      
+      #about .quick-facts {
+        padding: 28px !important;
+      }
+      
+      /* Services section */
+      #services > div:last-child {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      
+      .service-card {
+        padding: 28px !important;
+      }
+      
+      /* Data Band - Responsive */
+      .data-band {
+        padding: 28px 20px !important;
+      }
+      
+      .data-band > div:first-child {
+        flex-direction: column !important;
+        gap: 20px !important;
+      }
+      
+      .data-band .deliverables {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* WorkDora Band */
+      .workdora-band {
+        padding: 28px 20px !important;
+        margin-top: 40px !important;
+      }
+      
+      .workdora-band h3 {
+        font-size: 24px !important;
+      }
+      
+      .workdora-band button {
+        width: 100% !important;
+        justify-content: center !important;
+      }
+      
+      /* Stack section */
+      #stack .stack-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+      }
+      
+      #stack .stack-layer {
+        margin-bottom: 28px !important;
+      }
+      
+      .stack-item {
+        padding: 14px 16px !important;
+      }
+      
+      /* Projects section */
+      #work > div:last-child {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      
+      .project-card {
+        grid-column: span 1 !important;
+        padding: 28px !important;
+      }
+      
+      .project-card h3 {
+        font-size: 24px !important;
+      }
+      
+      /* Creator section */
+      .creator-section {
+        padding: 60px 20px !important;
+      }
+      
+      .creator-section > div {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+      }
+      
+      .creator-section h2 {
+        font-size: clamp(28px, 6vw, 40px) !important;
+      }
+      
+      /* Booking section */
+      .booking-section {
+        padding: 60px 20px !important;
+      }
+      
+      .booking-section .booking-grid {
+        grid-template-columns: 1fr !important;
+        gap: 16px !important;
+        margin-bottom: 36px !important;
+      }
+      
+      .booking-card {
+        padding: 24px !important;
+      }
+      
+      /* Contact section */
+      #contact {
+        grid-template-columns: 1fr !important;
+        gap: 48px !important;
+        padding: 60px 20px !important;
+      }
+      
+      #contact .contact-form {
+        padding-top: 0 !important;
+      }
+      
+      #contact .form-grid {
+        grid-template-columns: 1fr !important;
+      }
+      
+      /* Footer */
+      footer {
+        flex-direction: column !important;
+        text-align: center !important;
+        gap: 16px !important;
+        padding: 28px 20px !important;
+      }
+      
+      footer > div:last-child {
+        justify-content: center !important;
+      }
+      
+      /* Divider */
+      .divider {
+        margin: 0 20px !important;
+      }
+      
+      /* Buttons */
+      .btn-group {
+        gap: 12px !important;
+      }
+      
+      button, .btn {
+        padding: 10px 20px !important;
+        font-size: 12px !important;
+      }
+      
+      /* Floating buttons - adjust for mobile */
+      .floating-buttons {
+        bottom: 20px !important;
+        right: 20px !important;
+        gap: 10px !important;
+      }
+      
+      .floating-buttons a {
+        width: 48px !important;
+        height: 48px !important;
+      }
+      
+      .floating-buttons .wa-btn {
+        width: 52px !important;
+        height: 52px !important;
+      }
+      
+      /* Tooltips on mobile */
+      .tooltip {
+        display: none !important;
+      }
+    }
+    
+    /* Tablet optimization (optional) */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* Services - 2 columns on tablet */
+      #services > div:last-child {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      /* Projects - 2 columns on tablet */
+      #work > div:last-child {
+        grid-template-columns: repeat(2, 1fr) !important;
+      }
+      
+      /* Project card featured spans full width on tablet */
+      .project-card.featured {
+        grid-column: span 2 !important;
+      }
+      
+      /* Creator section on tablet */
+      .creator-section > div {
+        gap: 48px !important;
+      }
+    }
+    
+    /* Small mobile devices (below 480px) */
+    @media (max-width: 480px) {
+      body {
+        font-size: 15px;
+      }
+      
+      #hero h1 {
+        font-size: clamp(40px, 10vw, 60px) !important;
+      }
+      
+      #hero .stats {
+        gap: 20px !important;
+      }
+      
+      #hero .stats > div {
+        min-width: 80px;
+      }
+      
+      #hero .stats .stat-number {
+        font-size: 28px !important;
+      }
+      
+      .service-card {
+        padding: 24px !important;
+      }
+      
+      .service-card .service-icon {
+        font-size: 28px !important;
+      }
+      
+      .service-card h3 {
+        font-size: 20px !important;
+      }
+      
+      .stack-item {
+        padding: 12px 14px !important;
+      }
+      
+      .stack-item .stack-name {
+        font-size: 12px !important;
+      }
+      
+      .project-card {
+        padding: 24px !important;
+      }
+      
+      .project-card h3 {
+        font-size: 22px !important;
+      }
+      
+      .booking-card {
+        padding: 20px !important;
+      }
+      
+      .booking-card .booking-icon {
+        font-size: 28px !important;
+      }
+      
+      .booking-card h4 {
+        font-size: 18px !important;
+      }
+      
+      .channel-row {
+        padding: 14px 16px !important;
+      }
+      
+      .channel-row .channel-icon {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 16px !important;
+      }
+    }
   `}</style>
 );
 
@@ -111,7 +450,7 @@ const Divider = () => (
     style={{
       height: 1,
       background: `linear-gradient(90deg,transparent,${COLORS.border},transparent)`,
-      margin: "0 40px",
+      margin: "0 20px",
     }}
   />
 );
@@ -227,64 +566,171 @@ function CalIcon({ size = 20, color = "currentColor" }) {
 // ── NAV ──────────────────────────────────────────────────────
 function Nav() {
   const scrolled = useScrolled();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const links = ["About", "Services", "Stack", "Work", "Contact"];
+
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 200,
-        padding: "0 40px",
-        height: 70,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        background: scrolled ? "rgba(13,13,15,0.92)" : "rgba(13,13,15,0.7)",
-        backdropFilter: "blur(22px)",
-        borderBottom: `1px solid ${scrolled ? "rgba(240,165,0,0.18)" : COLORS.border}`,
-        transition: "all 0.3s",
-      }}
-    >
-      <a
-        href="#hero"
+    <>
+      <nav
         style={{
-          fontFamily: FONTS.disp,
-          fontSize: 20,
-          fontWeight: 800,
-          color: COLORS.white,
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 200,
+          padding: "0 40px",
+          height: 70,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          background: scrolled ? "rgba(13,13,15,0.92)" : "rgba(13,13,15,0.7)",
+          backdropFilter: "blur(22px)",
+          borderBottom: `1px solid ${scrolled ? "rgba(240,165,0,0.18)" : COLORS.border}`,
+          transition: "all 0.3s",
         }}
       >
-        Abass<span style={{ color: COLORS.gold }}>.</span>
-      </a>
-      <div style={{ display: "flex", gap: 34 }}>
-        {links.map((l) => (
-          <a
-            key={l}
-            href={`#${l.toLowerCase()}`}
-            style={{
-              fontFamily: FONTS.mono,
-              fontSize: 12,
-              color: COLORS.text2,
-              letterSpacing: "0.06em",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={(e) => (e.target.style.color = COLORS.gold)}
-            onMouseLeave={(e) => (e.target.style.color = COLORS.text2)}
+        <a
+          href="#hero"
+          style={{
+            fontFamily: FONTS.disp,
+            fontSize: 20,
+            fontWeight: 800,
+            color: COLORS.white,
+          }}
+        >
+          Abass<span style={{ color: COLORS.gold }}>.</span>
+        </a>
+
+        {/* Desktop Navigation */}
+        <div style={{ display: "flex", gap: 34 }}>
+          {links.map((l) => (
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              style={{
+                fontFamily: FONTS.mono,
+                fontSize: 12,
+                color: COLORS.text2,
+                letterSpacing: "0.06em",
+                transition: "color 0.2s",
+              }}
+              onMouseEnter={(e) => (e.target.style.color = COLORS.gold)}
+              onMouseLeave={(e) => (e.target.style.color = COLORS.text2)}
+            >
+              {l}
+            </a>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", gap: 14, alignItems: "center" }}>
+          <Btn
+            href={WA_BASE}
+            external
+            style={{ padding: "8px 20px", fontSize: 12 }}
           >
-            {l}
-          </a>
-        ))}
-      </div>
-      <Btn
-        href={WA_BASE}
-        external
-        style={{ padding: "8px 20px", fontSize: 12 }}
-      >
-        Let's Talk
-      </Btn>
-    </nav>
+            Let's Talk
+          </Btn>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              display: "none",
+              background: "transparent",
+              border: "none",
+              cursor: "pointer",
+              padding: "8px",
+              width: "40px",
+              height: "40px",
+              alignItems: "center",
+              justifyContent: "center",
+              "@media (max-width: 1023px)": { display: "flex" },
+            }}
+            className="mobile-menu-btn"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={COLORS.text}
+              strokeWidth="2"
+            >
+              {mobileMenuOpen ? (
+                <path d="M18 6L6 18M6 6L18 18" />
+              ) : (
+                <path d="M3 12H21M3 6H21M3 18H21" />
+              )}
+            </svg>
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 70,
+            left: 0,
+            right: 0,
+            background: "rgba(13,13,15,0.98)",
+            backdropFilter: "blur(20px)",
+            borderBottom: `1px solid ${COLORS.border}`,
+            padding: "24px 20px",
+            zIndex: 199,
+            display: "none",
+            flexDirection: "column",
+            gap: 20,
+          }}
+          className="mobile-menu"
+        >
+          {links.map((l) => (
+            <a
+              key={l}
+              href={`#${l.toLowerCase()}`}
+              onClick={() => setMobileMenuOpen(false)}
+              style={{
+                fontFamily: FONTS.mono,
+                fontSize: 16,
+                color: COLORS.text,
+                padding: "12px 0",
+                borderBottom: `1px solid ${COLORS.border}`,
+                display: "block",
+              }}
+            >
+              {l}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {/* Add style to show mobile elements only on small screens */}
+      <style>{`
+        @media (max-width: 1023px) {
+          .mobile-menu-btn {
+            display: flex !important;
+          }
+          .mobile-menu {
+            display: flex !important;
+          }
+          nav > div:first-of-type {
+            display: none !important;
+          }
+        }
+        @media (min-width: 1024px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-menu {
+            display: none !important;
+          }
+          nav > div:first-of-type {
+            display: flex !important;
+          }
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -547,21 +993,22 @@ function About() {
       value: "Tech Content Creator · TikTok · Reels",
     },
   ];
+
   return (
     <section
       id="about"
-      style={{ padding: "100px 40px", maxWidth: 1200, margin: "0 auto" }}
+      style={{ padding: "60px 20px", maxWidth: 1200, margin: "0 auto" }}
     >
       <Tag>About</Tag>
       <h2
         style={{
           fontFamily: FONTS.disp,
-          fontSize: "clamp(36px,5vw,56px)",
+          fontSize: "clamp(28px, 8vw, 56px)",
           fontWeight: 800,
-          letterSpacing: "-2px",
+          letterSpacing: "-1px",
           color: COLORS.white,
-          marginBottom: 64,
-          lineHeight: 1.05,
+          marginBottom: "40px",
+          lineHeight: 1.1,
         }}
       >
         Statistics graduate.
@@ -573,8 +1020,8 @@ function About() {
         className="reveal"
         style={{
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 72,
+          gridTemplateColumns: "1fr",
+          gap: "48px",
           alignItems: "start",
         }}
       >
@@ -619,38 +1066,39 @@ function About() {
               key={i}
               style={{
                 color: COLORS.text2,
-                marginBottom: 18,
-                fontSize: 17,
-                lineHeight: 1.85,
+                marginBottom: "16px",
+                fontSize: "15px",
+                lineHeight: 1.7,
               }}
             >
               {txt}
             </p>
           ))}
 
-          {/* OAU badge */}
           <div
             style={{
-              marginTop: 28,
+              marginTop: "24px",
               display: "inline-flex",
               alignItems: "center",
-              gap: 12,
+              gap: "12px",
               background: COLORS.violetDim,
               border: `1px solid ${COLORS.violet}30`,
               borderRadius: 10,
-              padding: "14px 20px",
+              padding: "12px 16px",
+              width: "100%",
+              flexWrap: "wrap",
             }}
           >
             <div
               style={{
-                width: 36,
-                height: 36,
+                width: "32px",
+                height: "32px",
                 background: `${COLORS.violet}20`,
                 borderRadius: 8,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: 18,
+                fontSize: "16px",
               }}
             >
               🎓
@@ -659,7 +1107,7 @@ function About() {
               <div
                 style={{
                   fontFamily: FONTS.mono,
-                  fontSize: 10,
+                  fontSize: "9px",
                   color: COLORS.text3,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
@@ -667,7 +1115,13 @@ function About() {
               >
                 Education
               </div>
-              <div style={{ fontSize: 15, color: COLORS.text, marginTop: 3 }}>
+              <div
+                style={{
+                  fontSize: "13px",
+                  color: COLORS.text,
+                  marginTop: "2px",
+                }}
+              >
                 BSc. Statistics · Obafemi Awolowo University, Ile-Ife
               </div>
             </div>
@@ -679,7 +1133,7 @@ function About() {
             background: COLORS.surface,
             border: `1px solid ${COLORS.border}`,
             borderRadius: 16,
-            padding: 38,
+            padding: "24px",
             position: "relative",
             overflow: "hidden",
           }}
@@ -697,11 +1151,11 @@ function About() {
           <div
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 12,
+              fontSize: "11px",
               color: COLORS.gold,
               letterSpacing: "0.12em",
               textTransform: "uppercase",
-              marginBottom: 26,
+              marginBottom: "20px",
             }}
           >
             Quick Facts
@@ -711,18 +1165,18 @@ function About() {
               key={f.label}
               style={{
                 display: "flex",
-                gap: 14,
+                gap: "12px",
                 alignItems: "flex-start",
-                paddingBottom: i < facts.length - 1 ? 18 : 0,
-                marginBottom: i < facts.length - 1 ? 18 : 0,
+                paddingBottom: i < facts.length - 1 ? "14px" : 0,
+                marginBottom: i < facts.length - 1 ? "14px" : 0,
                 borderBottom:
                   i < facts.length - 1 ? `1px solid ${COLORS.border}` : "none",
               }}
             >
               <div
                 style={{
-                  width: 34,
-                  height: 34,
+                  width: "30px",
+                  height: "30px",
                   background:
                     f.label === "Education"
                       ? `${COLORS.violet}20`
@@ -731,7 +1185,7 @@ function About() {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: 16,
+                  fontSize: "14px",
                   flexShrink: 0,
                 }}
               >
@@ -741,7 +1195,7 @@ function About() {
                 <div
                   style={{
                     fontFamily: FONTS.mono,
-                    fontSize: 10,
+                    fontSize: "9px",
                     color: COLORS.text3,
                     letterSpacing: "0.1em",
                     textTransform: "uppercase",
@@ -749,7 +1203,13 @@ function About() {
                 >
                   {f.label}
                 </div>
-                <div style={{ fontSize: 14, color: COLORS.text, marginTop: 3 }}>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    color: COLORS.text,
+                    marginTop: "2px",
+                  }}
+                >
                   {f.value}
                 </div>
               </div>
@@ -803,29 +1263,29 @@ function Services() {
   return (
     <section
       id="services"
-      style={{ padding: "100px 40px", maxWidth: 1200, margin: "0 auto" }}
+      style={{ padding: "60px 20px", maxWidth: 1200, margin: "0 auto" }}
     >
       <Tag>Services</Tag>
       <h2
         style={{
           fontFamily: FONTS.disp,
-          fontSize: "clamp(36px,5vw,56px)",
+          fontSize: "clamp(28px, 8vw, 56px)",
           fontWeight: 800,
-          letterSpacing: "-2px",
+          letterSpacing: "-1px",
           color: COLORS.white,
-          marginBottom: 16,
-          lineHeight: 1.05,
+          marginBottom: "12px",
+          lineHeight: 1.1,
         }}
       >
         What I <span style={{ color: COLORS.gold }}>build</span> for you.
       </h2>
       <p
         style={{
-          fontSize: 18,
+          fontSize: "15px",
           color: COLORS.text2,
-          maxWidth: 560,
-          lineHeight: 1.8,
-          marginBottom: 60,
+          maxWidth: "100%",
+          lineHeight: 1.7,
+          marginBottom: "40px",
         }}
       >
         Four service areas. Production-ready, documented, built to grow — and
@@ -836,8 +1296,8 @@ function Services() {
         className="reveal"
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(2,1fr)",
-          gap: 22,
+          gridTemplateColumns: "1fr",
+          gap: "20px",
         }}
       >
         {SERVICES.map((s, i) => (
@@ -869,11 +1329,11 @@ function ServiceCard({
         background: highlight ? `${COLORS.violet}08` : COLORS.surface,
         border: `1px solid ${hov ? accent : highlight ? `${COLORS.violet}30` : COLORS.border}`,
         borderRadius: 16,
-        padding: "38px 34px",
+        padding: "24px",
         position: "relative",
         overflow: "hidden",
         transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
-        transform: hov ? "translateY(-6px)" : "none",
+        transform: hov ? "translateY(-4px)" : "none",
         transitionDelay: `${delay}ms`,
       }}
     >
@@ -881,16 +1341,16 @@ function ServiceCard({
         <div
           style={{
             position: "absolute",
-            top: 12,
-            right: 16,
+            top: "8px",
+            right: "12px",
             fontFamily: FONTS.mono,
-            fontSize: 10,
+            fontSize: "8px",
             color: COLORS.violet,
             background: `${COLORS.violet}15`,
             border: `1px solid ${COLORS.violet}30`,
-            padding: "3px 10px",
+            padding: "2px 8px",
             borderRadius: 100,
-            letterSpacing: "0.12em",
+            letterSpacing: "0.1em",
           }}
         >
           STATISTICS BACKGROUND
@@ -912,38 +1372,38 @@ function ServiceCard({
       <div
         style={{
           fontFamily: FONTS.mono,
-          fontSize: 11,
+          fontSize: "10px",
           color: accent,
-          marginBottom: 22,
+          marginBottom: "16px",
           letterSpacing: "0.1em",
         }}
       >
         {num}
       </div>
-      <div style={{ fontSize: 34, marginBottom: 18 }}>{icon}</div>
+      <div style={{ fontSize: "28px", marginBottom: "14px" }}>{icon}</div>
       <div
         style={{
           fontFamily: FONTS.disp,
-          fontSize: 22,
+          fontSize: "18px",
           fontWeight: 700,
           color: COLORS.white,
-          marginBottom: 12,
-          letterSpacing: "-0.5px",
+          marginBottom: "10px",
+          letterSpacing: "-0.3px",
         }}
       >
         {title}
       </div>
       <p
         style={{
-          fontSize: 15,
+          fontSize: "13px",
           color: COLORS.text2,
-          lineHeight: 1.75,
-          marginBottom: 24,
+          lineHeight: 1.6,
+          marginBottom: "16px",
         }}
       >
         {desc}
       </p>
-      <div style={{ fontFamily: FONTS.mono, fontSize: 12, color: accent }}>
+      <div style={{ fontFamily: FONTS.mono, fontSize: "11px", color: accent }}>
         {price}
       </div>
     </div>
@@ -979,11 +1439,11 @@ function DataBand() {
       ref={ref}
       className="reveal"
       style={{
-        marginTop: 40,
+        marginTop: "32px",
         background: "linear-gradient(135deg,#120d1a,#0e0a16)",
         border: `1px solid ${COLORS.violet}25`,
         borderRadius: 16,
-        padding: 46,
+        padding: "28px 20px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -1001,38 +1461,38 @@ function DataBand() {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flexWrap: "wrap",
-          gap: 24,
-          marginBottom: 40,
+          flexDirection: "column",
+          gap: "20px",
+          marginBottom: "28px",
         }}
       >
         <div>
           <div
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
+              fontSize: "10px",
               color: COLORS.violet,
               letterSpacing: "0.2em",
               textTransform: "uppercase",
-              marginBottom: 14,
+              marginBottom: "12px",
               display: "flex",
               alignItems: "center",
-              gap: 10,
+              gap: "8px",
             }}
           >
-            <span style={{ width: 20, height: 1, background: COLORS.violet }} />
+            <span
+              style={{ width: "16px", height: 1, background: COLORS.violet }}
+            />
             Data Analysis & Business Intelligence
           </div>
           <div
             style={{
               fontFamily: FONTS.disp,
-              fontSize: 26,
+              fontSize: "20px",
               fontWeight: 800,
               color: COLORS.white,
-              letterSpacing: "-0.5px",
-              marginBottom: 10,
+              letterSpacing: "-0.3px",
+              marginBottom: "8px",
             }}
           >
             Numbers that mean something.
@@ -1040,27 +1500,25 @@ function DataBand() {
           <p
             style={{
               color: COLORS.text2,
-              fontSize: 16,
-              lineHeight: 1.75,
-              maxWidth: 560,
+              fontSize: "13px",
+              lineHeight: 1.6,
+              maxWidth: "100%",
             }}
           >
             A Statistics degree from OAU means I don't just put charts on a
             screen — I understand the underlying distributions, the appropriate
-            tests, and when a trend is real versus noise. Most developers can
-            build a dashboard. I can also tell you what it's telling you.
+            tests, and when a trend is real versus noise.
           </p>
         </div>
         <div
           style={{
             fontFamily: FONTS.mono,
-            fontSize: 11,
+            fontSize: "10px",
             color: COLORS.violet,
             background: `${COLORS.violet}12`,
             border: `1px solid ${COLORS.violet}25`,
             borderRadius: 10,
-            padding: "12px 18px",
-            whiteSpace: "nowrap",
+            padding: "8px 12px",
             alignSelf: "flex-start",
           }}
         >
@@ -1070,8 +1528,8 @@ function DataBand() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(2,1fr)",
-          gap: 16,
+          gridTemplateColumns: "1fr",
+          gap: "12px",
         }}
       >
         {deliverables.map((d) => (
@@ -1081,27 +1539,31 @@ function DataBand() {
               background: `${COLORS.violet}08`,
               border: `1px solid ${COLORS.violet}18`,
               borderRadius: 10,
-              padding: "20px 22px",
+              padding: "14px",
               display: "flex",
-              gap: 14,
+              gap: "12px",
               alignItems: "flex-start",
             }}
           >
-            <div style={{ fontSize: 22, flexShrink: 0 }}>{d.icon}</div>
+            <div style={{ fontSize: "20px", flexShrink: 0 }}>{d.icon}</div>
             <div>
               <div
                 style={{
                   fontFamily: FONTS.disp,
-                  fontSize: 15,
+                  fontSize: "13px",
                   fontWeight: 700,
                   color: COLORS.white,
-                  marginBottom: 5,
+                  marginBottom: "4px",
                 }}
               >
                 {d.label}
               </div>
               <div
-                style={{ fontSize: 14, color: COLORS.text2, lineHeight: 1.6 }}
+                style={{
+                  fontSize: "12px",
+                  color: COLORS.text2,
+                  lineHeight: 1.5,
+                }}
               >
                 {d.desc}
               </div>
@@ -1109,7 +1571,14 @@ function DataBand() {
           </div>
         ))}
       </div>
-      <div style={{ display: "flex", gap: 9, flexWrap: "wrap", marginTop: 28 }}>
+      <div
+        style={{
+          display: "flex",
+          gap: "8px",
+          flexWrap: "wrap",
+          marginTop: "20px",
+        }}
+      >
         {[
           "Python",
           "R",
@@ -1118,17 +1587,14 @@ function DataBand() {
           "Tableau",
           "Pandas",
           "Recharts",
-          "D3.js",
           "Statistical Modelling",
-          "Regression Analysis",
-          "Forecasting",
         ].map((p) => (
           <span
             key={p}
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
-              padding: "4px 11px",
+              fontSize: "10px",
+              padding: "3px 8px",
               borderRadius: 4,
               background: `${COLORS.violet}10`,
               border: `1px solid ${COLORS.violet}22`,
@@ -1156,11 +1622,11 @@ function WorkDoraBand() {
   return (
     <div
       style={{
-        marginTop: 56,
+        marginTop: "40px",
         background: "linear-gradient(135deg,#0d1a0f,#0a1510)",
         border: "1px solid rgba(34,197,94,0.2)",
         borderRadius: 16,
-        padding: 46,
+        padding: "28px 20px",
         position: "relative",
         overflow: "hidden",
       }}
@@ -1178,27 +1644,27 @@ function WorkDoraBand() {
       <div
         style={{
           fontFamily: FONTS.mono,
-          fontSize: 11,
+          fontSize: "10px",
           color: COLORS.green,
           letterSpacing: "0.2em",
           textTransform: "uppercase",
-          marginBottom: 14,
+          marginBottom: "12px",
           display: "flex",
           alignItems: "center",
-          gap: 10,
+          gap: "8px",
         }}
       >
-        <span style={{ width: 20, height: 1, background: COLORS.green }} />
+        <span style={{ width: "16px", height: 1, background: COLORS.green }} />
         Flagship Product — Now Live
       </div>
       <div
         style={{
           fontFamily: FONTS.disp,
-          fontSize: 28,
+          fontSize: "22px",
           fontWeight: 800,
           color: COLORS.white,
-          letterSpacing: "-0.5px",
-          marginBottom: 12,
+          letterSpacing: "-0.3px",
+          marginBottom: "10px",
         }}
       >
         WorkDora — Task to Cash OS
@@ -1206,10 +1672,10 @@ function WorkDoraBand() {
       <p
         style={{
           color: COLORS.text2,
-          fontSize: 16,
-          lineHeight: 1.75,
-          maxWidth: 620,
-          marginBottom: 24,
+          fontSize: "13px",
+          lineHeight: 1.6,
+          maxWidth: "100%",
+          marginBottom: "18px",
         }}
       >
         An offline-capable, AI-augmented workspace for African SMBs and
@@ -1221,15 +1687,20 @@ function WorkDoraBand() {
         </strong>
       </p>
       <div
-        style={{ display: "flex", gap: 9, flexWrap: "wrap", marginBottom: 28 }}
+        style={{
+          display: "flex",
+          gap: "8px",
+          flexWrap: "wrap",
+          marginBottom: "20px",
+        }}
       >
         {pills.map((p) => (
           <span
             key={p}
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 11,
-              padding: "4px 11px",
+              fontSize: "10px",
+              padding: "3px 8px",
               borderRadius: 4,
               background: "rgba(34,197,94,0.07)",
               border: "1px solid rgba(34,197,94,0.2)",
@@ -1244,7 +1715,12 @@ function WorkDoraBand() {
         href="https://workdora.com"
         external={true}
         variant="green"
-        style={{ padding: "12px 28px", fontSize: 14 }}
+        style={{
+          padding: "10px 20px",
+          fontSize: "12px",
+          width: "100%",
+          justifyContent: "center",
+        }}
       >
         Visit WorkDora.com →
       </Btn>
@@ -1261,7 +1737,7 @@ function Stack() {
       items: [
         { name: "React", cat: "UI Framework" },
         { name: "Next.js", cat: "Full-Stack Framework" },
-        { name: "React Native", cat: "Mobile (iOS + Android)" },
+        { name: "React Native", cat: "Mobile" },
         { name: "Tailwind CSS", cat: "Styling" },
       ],
     },
@@ -1280,14 +1756,14 @@ function Stack() {
         { name: "Python", cat: "Data Science", violet: true },
         { name: "R", cat: "Statistical Analysis", violet: true },
         { name: "SQL", cat: "Data Querying", violet: true },
-        { name: "Power BI / Tableau", cat: "BI Dashboards", violet: true },
+        { name: "Power BI", cat: "BI Dashboards", violet: true },
       ],
     },
     {
       label: "AI & Deployment",
       items: [
         { name: "OpenAI API", cat: "LLM Integration", green: true },
-        { name: "Anthropic Claude", cat: "AI Integration", green: true },
+        { name: "Claude", cat: "AI Integration", green: true },
         { name: "Vercel / AWS", cat: "Deployment", green: true },
         { name: "GitHub", cat: "Version Control", green: true },
       ],
@@ -1296,47 +1772,47 @@ function Stack() {
   return (
     <section
       id="stack"
-      style={{ padding: "100px 40px", maxWidth: 1200, margin: "0 auto" }}
+      style={{ padding: "60px 20px", maxWidth: 1200, margin: "0 auto" }}
     >
       <Tag>Tech Stack</Tag>
       <h2
         style={{
           fontFamily: FONTS.disp,
-          fontSize: "clamp(36px,5vw,56px)",
+          fontSize: "clamp(28px, 8vw, 56px)",
           fontWeight: 800,
-          letterSpacing: "-2px",
+          letterSpacing: "-1px",
           color: COLORS.white,
-          marginBottom: 16,
-          lineHeight: 1.05,
+          marginBottom: "12px",
+          lineHeight: 1.1,
         }}
       >
         The tools I <span style={{ color: COLORS.gold }}>build with.</span>
       </h2>
       <p
         style={{
-          fontSize: 18,
+          fontSize: "15px",
           color: COLORS.text2,
-          maxWidth: 480,
-          lineHeight: 1.8,
-          marginBottom: 60,
+          maxWidth: "100%",
+          lineHeight: 1.7,
+          marginBottom: "40px",
         }}
       >
         Every tool chosen deliberately. Every layer covered.
       </p>
       <div ref={ref} className="reveal">
         {layers.map((layer) => (
-          <div key={layer.label} style={{ marginBottom: 32 }}>
+          <div key={layer.label} style={{ marginBottom: "28px" }}>
             <div
               style={{
                 fontFamily: FONTS.mono,
-                fontSize: 11,
+                fontSize: "10px",
                 color:
                   layer.label === "Data & Analytics"
                     ? COLORS.violet
                     : COLORS.text3,
                 letterSpacing: "0.12em",
                 textTransform: "uppercase",
-                marginBottom: 14,
+                marginBottom: "12px",
               }}
             >
               {layer.label}
@@ -1344,8 +1820,8 @@ function Stack() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(4,1fr)",
-                gap: 14,
+                gridTemplateColumns: "repeat(2,1fr)",
+                gap: "10px",
               }}
             >
               {layer.items.map((item, j) => (
@@ -1407,29 +1883,29 @@ function Projects() {
   return (
     <section
       id="work"
-      style={{ padding: "100px 40px", maxWidth: 1200, margin: "0 auto" }}
+      style={{ padding: "60px 20px", maxWidth: 1200, margin: "0 auto" }}
     >
       <Tag>Selected Work</Tag>
       <h2
         style={{
           fontFamily: FONTS.disp,
-          fontSize: "clamp(36px,5vw,56px)",
+          fontSize: "clamp(28px, 8vw, 56px)",
           fontWeight: 800,
-          letterSpacing: "-2px",
+          letterSpacing: "-1px",
           color: COLORS.white,
-          marginBottom: 16,
-          lineHeight: 1.05,
+          marginBottom: "12px",
+          lineHeight: 1.1,
         }}
       >
         Things I've <span style={{ color: COLORS.gold }}>built.</span>
       </h2>
       <p
         style={{
-          fontSize: 18,
+          fontSize: "15px",
           color: COLORS.text2,
-          maxWidth: 480,
-          lineHeight: 1.8,
-          marginBottom: 60,
+          maxWidth: "100%",
+          lineHeight: 1.7,
+          marginBottom: "40px",
         }}
       >
         A selection of projects across web, mobile, data, and AI.
@@ -1437,22 +1913,14 @@ function Projects() {
       <div
         ref={ref}
         className="reveal"
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 26 }}
+        style={{ display: "grid", gridTemplateColumns: "1fr", gap: "20px" }}
       >
         <ProjectCard
           featured
           tag="Live Product — Now Available"
           title="WorkDora"
-          desc="A task-to-cash operating system for African SMBs. Combines project management, invoicing with part-payment support, expense tracking, and AI-assisted workflows in a single offline-capable platform. Built for African SMBs and neurodiverse knowledge workers."
-          stack={[
-            "React",
-            "Next.js",
-            "Node.js",
-            "MongoDB",
-            "PWA",
-            "AI Layer",
-            "Socket.io",
-          ]}
+          desc="A task-to-cash operating system for African SMBs. Combines project management, invoicing with part-payment support, expense tracking, and AI-assisted workflows."
+          stack={["React", "Next.js", "Node.js", "MongoDB", "PWA", "AI Layer"]}
           linkText="Visit WorkDora →"
           href="https://workdora.com"
           external={true}
@@ -1461,30 +1929,23 @@ function Projects() {
           tag="Data & Business Intelligence"
           accentColor={COLORS.violet}
           title="SME Analytics Dashboard"
-          desc="A full BI dashboard for an SME client built in React with a Node.js data API and MongoDB aggregation pipeline. KPI tracking, revenue trends, expense breakdowns, and exportable reports — designed from a statistical standpoint, not just aesthetics."
-          stack={[
-            "React",
-            "Node.js",
-            "MongoDB",
-            "Recharts",
-            "Python",
-            "Statistical Analysis",
-          ]}
+          desc="A full BI dashboard for an SME client. KPI tracking, revenue trends, expense breakdowns."
+          stack={["React", "Node.js", "MongoDB", "Recharts", "Python"]}
           linkText="Build a BI dashboard"
           href={`${WA_BASE}?text=${encodeURIComponent("Hi Abass, I need a business intelligence dashboard")}`}
         />
         <ProjectCard
           tag="Web App"
           title="Full-Stack SME Dashboard"
-          desc="Custom business management dashboard for an SME client. Real-time data, role-based access, reporting, and mobile-responsive interface."
+          desc="Custom business management dashboard with real-time data, role-based access, reporting."
           stack={["React", "Node.js", "MongoDB", "Express"]}
           linkText="Build something similar"
-          href={`${WA_BASE}?text=${encodeURIComponent("Hi Abass, I want to build something similar to your SME dashboard")}`}
+          href={`${WA_BASE}?text=${encodeURIComponent("Hi Abass, I want to build something similar")}`}
         />
         <ProjectCard
           tag="Mobile App"
           title="React Native Cross-Platform App"
-          desc="Cross-platform mobile app on iOS and Android from a single React Native codebase. Push notifications, offline support, full API integration."
+          desc="iOS and Android from a single React Native codebase. Push notifications, offline support."
           stack={["React Native", "Node.js", "MongoDB"]}
           linkText="Need a mobile app?"
           href={`${WA_BASE}?text=${encodeURIComponent("Hi Abass, I need a mobile app")}`}
@@ -1972,12 +2433,12 @@ function Contact() {
     <section
       id="contact"
       style={{
-        padding: "100px 40px",
+        padding: "60px 20px",
         maxWidth: 1200,
         margin: "0 auto",
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 80,
+        gridTemplateColumns: "1fr",
+        gap: "48px",
         alignItems: "start",
       }}
     >
@@ -1985,11 +2446,11 @@ function Contact() {
         <div
           style={{
             fontFamily: FONTS.mono,
-            fontSize: 12,
+            fontSize: "11px",
             color: COLORS.gold,
             letterSpacing: "0.2em",
             textTransform: "uppercase",
-            marginBottom: 14,
+            marginBottom: "12px",
           }}
         >
           Contact
@@ -1997,12 +2458,12 @@ function Contact() {
         <h2
           style={{
             fontFamily: FONTS.disp,
-            fontSize: "clamp(36px,4.5vw,52px)",
+            fontSize: "clamp(28px, 8vw, 52px)",
             fontWeight: 800,
             color: COLORS.white,
-            lineHeight: 1.05,
-            letterSpacing: "-1.5px",
-            marginBottom: 18,
+            lineHeight: 1.1,
+            letterSpacing: "-1px",
+            marginBottom: "14px",
           }}
         >
           Let's build
@@ -2012,42 +2473,42 @@ function Contact() {
         <p
           style={{
             color: COLORS.text2,
-            fontSize: 17,
-            lineHeight: 1.8,
-            marginBottom: 40,
-            maxWidth: 420,
+            fontSize: "15px",
+            lineHeight: 1.7,
+            marginBottom: "32px",
+            maxWidth: "100%",
           }}
         >
           Whether you have a fully scoped project or just an idea and a budget,
           I'm worth talking to. I'll tell you honestly what's possible and what
           it should cost.
         </p>
-        <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
           {channels.map((ch) => (
             <ChannelRow key={ch.label} {...ch} />
           ))}
         </div>
       </div>
 
-      <div style={{ paddingTop: 4 }}>
+      <div>
         <div
           style={{
             fontFamily: FONTS.mono,
-            fontSize: 11,
+            fontSize: "10px",
             color: COLORS.text3,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            marginBottom: 18,
+            marginBottom: "14px",
           }}
         >
           Or send a message
         </div>
         <form
           onSubmit={handleSubmit}
-          style={{ display: "flex", flexDirection: "column", gap: 14 }}
+          style={{ display: "flex", flexDirection: "column", gap: "12px" }}
         >
           <div
-            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}
+            style={{ display: "grid", gridTemplateColumns: "1fr", gap: "12px" }}
           >
             <Field
               label="Your Name"
@@ -2070,11 +2531,11 @@ function Contact() {
             <div
               style={{
                 fontFamily: FONTS.mono,
-                fontSize: 10,
+                fontSize: "9px",
                 color: COLORS.text3,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
-                marginBottom: 7,
+                marginBottom: "6px",
               }}
             >
               Project Type
@@ -2093,7 +2554,7 @@ function Contact() {
           <Field
             label="Tell me about it"
             as="textarea"
-            rows={5}
+            rows={4}
             placeholder="Describe the project, your timeline, and approximate budget..."
             value={form.message}
             onChange={(v) => setForm((f) => ({ ...f, message: v }))}
@@ -2103,19 +2564,19 @@ function Contact() {
             disabled={status !== "idle"}
             style={{
               fontFamily: FONTS.mono,
-              fontSize: 14,
+              fontSize: "13px",
               fontWeight: 500,
               background: status === "sent" ? COLORS.green : COLORS.gold,
               color: COLORS.bg,
-              padding: "15px 28px",
+              padding: "12px 20px",
               borderRadius: 8,
               border: "none",
               cursor: status !== "idle" ? "default" : "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              gap: 10,
-              transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+              gap: "8px",
+              transition: "all 0.3s",
             }}
           >
             {status === "idle" && "Send via WhatsApp →"}
@@ -2249,21 +2710,22 @@ function Footer() {
       <Divider />
       <footer
         style={{
-          padding: "36px 40px",
+          padding: "24px 20px",
           maxWidth: 1200,
           margin: "0 auto",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: 20,
+          justifyContent: "center",
+          gap: "16px",
+          textAlign: "center",
         }}
       >
         <a
           href="#hero"
           style={{
             fontFamily: FONTS.disp,
-            fontSize: 18,
+            fontSize: "16px",
             fontWeight: 800,
             color: COLORS.white,
           }}
@@ -2271,11 +2733,22 @@ function Footer() {
           Abass<span style={{ color: COLORS.gold }}>.</span>
         </a>
         <span
-          style={{ fontFamily: FONTS.mono, fontSize: 11, color: COLORS.text3 }}
+          style={{
+            fontFamily: FONTS.mono,
+            fontSize: "10px",
+            color: COLORS.text3,
+          }}
         >
           © 2026 Abass Olaiya · BSc Statistics, OAU · Built with MERN
         </span>
-        <div style={{ display: "flex", gap: 22 }}>
+        <div
+          style={{
+            display: "flex",
+            gap: "16px",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {[
             ["WhatsApp", WA_BASE],
             ["Book a Call", CAL_LINK],
@@ -2289,7 +2762,7 @@ function Footer() {
               rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
               style={{
                 fontFamily: FONTS.mono,
-                fontSize: 11,
+                fontSize: "10px",
                 color: COLORS.text3,
                 transition: "color 0.2s",
               }}
