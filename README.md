@@ -10,7 +10,7 @@ Building at the intersection of Software Engineering, Artificial Intelligence, D
 
 <br/>
 
-<a href="https://www.linkedin.com/in/ayotundeolaiya">
+<a href="www.linkedin.com/in/olaiya-ayotunde-abass">
   <img src="https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin" />
 </a>
 <a href="https://github.com/abassolaiya">
