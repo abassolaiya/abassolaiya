@@ -111,39 +111,83 @@ Areas of interest:
 
 ---
 
-## 🌟 Featured Projects
+## 🌟 Featured Projects & Products
 
-I enjoy building products that address real business and societal challenges.
+I enjoy building and contributing to technology products that solve real-world problems. My experience spans food technology, artificial intelligence, healthcare technology, and digital platforms.
 
-### 🚑 PulseChart
-**Emergency Response & Healthcare Technology**
+### 🍔 [Heyfood](https://heyfood.africa)
+**FoodTech | Food Ordering & Delivery Ecosystem**
 
-An emergency response platform designed to connect hospitals, ambulances, first responders, and emergency agencies to improve emergency coordination and response times.
+A technology platform connecting customers with restaurants, food vendors, and delivery partners. Heyfood provides digital ordering, merchant management, order processing, and delivery solutions.
 
-Focus: Healthtech, System Architecture, Real-time Systems, API Development.
+**Product Highlights:**
+- Online food ordering and delivery.
+- Restaurant and merchant management.
+- Order management and processing.
+- Digital merchant storefronts.
+- Rider and delivery operations.
+- QR-based dine-in ordering.
 
-### 💼 WorkDora
-**Business Management & Productivity Platform**
+**Domain:** FoodTech · E-commerce · Marketplace · Logistics
 
-A business management solution designed to help SMEs manage projects, tasks, employees, invoices, expenses, and business operations from one platform.
+### 🍕 [Foodelo](https://foodelo.africa)
+**FoodTech | Food Delivery & Marketplace Platform**
 
-Focus: SaaS, Full Stack Engineering, Fintech Integrations, Product Development.
+A food technology platform designed to simplify food ordering and delivery while helping restaurants and local food vendors reach more customers.
 
-### 🌾 FarmyApp
-**Agritech & Data-Driven Innovation**
+**Product Highlights:**
+- Digital food ordering experience.
+- Restaurant and food vendor discovery.
+- Customer and vendor connectivity.
+- Food delivery coordination.
+- Vendor onboarding and management.
+- Technology-enabled food business operations.
 
-A technology-driven agricultural marketplace connecting farmers, buyers, and researchers while exploring the application of data and AI in agriculture.
+**Domain:** FoodTech · Marketplace · E-commerce · Digital Business
 
-Focus: Agritech, Data Science, Marketplace Development.
+### 🤖 [Palet AI](https://palet.ai)
+**Artificial Intelligence | Generative AI | Creative Technology**
 
-### 📊 Nigerian Business Intelligence Dashboard
-**Business Intelligence & Analytics**
+An AI-powered platform leveraging generative artificial intelligence to help businesses develop brand strategies, marketing communications, and creative designs.
 
-An interactive business intelligence project analyzing data from over 4,200 Nigerian businesses collected in 2023.
+**Product Highlights:**
+- Generative AI integration.
+- AI-assisted brand strategy.
+- Automated marketing content generation.
+- Creative design workflows.
+- AI-powered business productivity.
 
-Focus: Data Analytics, World Bank Data, Business Intelligence, Data Visualization.
+**Domain:** Artificial Intelligence · LLM Integration · Generative AI · Automation
+
+### 🏥 [Ohealth](https://www.ohealthng.com)
+**HealthTech | Telemedicine | Digital Healthcare**
+
+A digital healthcare platform connecting patients with medical professionals through technology, making healthcare services more accessible and convenient.
+
+**Product Highlights:**
+- Telemedicine and remote consultations.
+- Online medical appointment booking.
+- Patient and practitioner connectivity.
+- Electronic medical records.
+- Digital patient management.
+- Healthcare technology and workflow solutions.
+
+**Domain:** HealthTech · Telemedicine · Healthcare Systems · Digital Transformation
 
 ---
+
+### 💡 What These Projects Represent
+
+These products reflect my interest and experience in engineering solutions across different industries:
+
+| Industry | Project | Technology Focus |
+|---|---|---|
+| FoodTech | Heyfood | Marketplace, Ordering & Logistics |
+| FoodTech | Foodelo | E-commerce & Delivery Systems |
+| AI & Creative Tech | Palet AI | Generative AI & Automation |
+| Healthcare | Ohealth | Telemedicine & Digital Health |
+
+I enjoy working on products where software engineering meets real business needs, user experience, and scalable technology.
 
 ## 🧠 Engineering Philosophy
 
