@@ -1,6 +1,6 @@
 <div align="center">
 
-# 👋 Hi, I'm Abass Olaiya
+# 👋 Hi, I'm Abass Olaiya Ayotunde
 
 ### Senior Full Stack Engineer | AI Engineer | Product Engineer | Data Scientist
 
